@@ -2,8 +2,7 @@
 /******************************************************************************/
 /* k2go Timeline for JQuery Plugin                                            */
 /* version 1.8.0                                                              */
-/* author  Inoue Computer Service.                                            */
-/* Copyright (c) k2go. All rights reserved.                                   */
+/* Copyright (c) NICT. All rights reserved.                                   */
 /* See License.txt for the license information.                               */
 /******************************************************************************/
 /******************************************************************************/
