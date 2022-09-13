@@ -1,1 +1,942 @@
+<!DOCTYPE html>
+<html lang="ja">
 
+<head>
+  <meta charset="utf-8">
+  <title>Timeline</title>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="reset.css" media="all">
+  <link rel="stylesheet" href="style.css" media="all">
+</head>
+
+<body>
+
+  <div class="cols">
+    <h2>変更履歴</h2>
+    <ul>
+      <li>
+        2021年01月26日 バージョン1.8.0リリース
+        <ul>
+          <li>摘み（ポインタ）上でマウスホイール操作をした際、currentTimeが変わらないようになりました。</li>
+          <li>disableZoomをtrueに設定した際、 ズーム操作時（ダブルクリックやマウスホイール操作時）にcurrentTimeが変わらないようになりました。</li>
+        </ul>
+      </li>
+      <li>
+        2020年08月05日 バージョン1.7.0リリース
+        <ul>
+          <li>オプションにpickDoubleTapが追加され、摘み（ポインタ）をダブルクリック（ダブルタップ）した際に呼び出されるコールバック関数を指定出来るようになりました。</li>
+        </ul>
+      </li>
+      <li>
+        2020年07月30日 バージョン1.6.0リリース
+        <ul>
+          <li>オプションにpickTapHoldが追加され、摘み（ポインタ）を長押しした際に呼び出されるコールバック関数を指定出来るようになりました。</li>
+          <li>
+            オプションのrangeMoveStart、rangeMove、rangeMoveEnd、rangeChangeの各コールバック関数の引数オブジェクトの中身が、startTime、endTimeからrangeStartTime、rangeEndTimeに変わりました。
+          </li>
+        </ul>
+      </li>
+      <li>
+        2020年07月22日 バージョン1.5.0リリース
+        <ul>
+          <li>レンジバーが表示中の場合、startメソッドはレンジバーの範囲内で自動スクロールするようになりました。</li>
+          <li>摘み（ポインタ）およびレンジバーが表示可能範囲を超えて移動してしまう不具合を修正しました。</li>
+        </ul>
+      </li>
+      <li>
+        2020年07月17日 バージョン1.4.0リリース
+        <ul>
+          <li>showRangeBarメソッド、hiddenRangeBarメソッドが追加され、ユーザが任意の期間を操作出来るレンジバーを描画出来るようになりました。</li>
+          <li>オプションにrangeStartTime、rangeEndTimeが追加され、レンジバーの開始日時、終了日時が指定出来るようになりました。</li>
+          <li>
+            オプションにrangeMoveStart、rangeMove、rangeMoveEnd、rangeChangeが追加され、レンジバーのドラッグ開始、ドラッグ中、ドラッグ終了、任意期間変更時に呼び出されるコールバック関数を指定出来るようになりました。
+          </li>
+        </ul>
+      </li>
+      <li>
+        2020年06月23日 バージョン1.3.1リリース
+        <ul>
+          <li>labelPositionを"range"に設定した際のラベル表示の一部不具合を修正しました。</li>
+          <li>syncPickAndBarをtrueに設定した際の動作不具合を修正しました。</li>
+        </ul>
+      </li>
+      <li>
+        2020年06月19日 バージョン1.3.0リリース
+        <ul>
+          <li>オプションにclickBarToMovePickが追加され、時間軸バーをクリックした時に摘み（ポインタ）をクリックした位置に移動出来るようになりました。</li>
+          <li>オプションにlabelPositionが追加され、時間軸バー上に表示される日時の位置を指定出来るようになりました。</li>
+        </ul>
+      </li>
+      <li>
+        2020年05月22日 バージョン1.2.1リリース
+        <ul>
+          <li>和暦表示の不具合を修正しました。</li>
+        </ul>
+      </li>
+      <li>
+        2019年11月27日 バージョン1.2.0リリース
+        <ul>
+          <li>オプションにzoomStart、zoom、zoomEndが追加され、ズーム開始、ズーム中、ズーム終了時に呼び出されるコールバック関数を指定出来るようになりました。</li>
+          <li>createメソッドの引数にdurationが追加され、再描画時にアニメーション効果を与える事が出来るようになりました。（createメソッドの各引数は一つのオブジェクト形式に収めるよう変更されました）</li>
+        </ul>
+      </li>
+      <li>
+        2019年11月13日 バージョン1.1.0リリース
+        <ul>
+          <li>オプションにsyncPickAndBarが追加され、時間軸バーと摘み（ポインタ）が同期して左右にドラッグ出来るようになりました。</li>
+          <li>オプションにrailClickが追加され、摘み（ポインタ）が左右に動くレール上をクリックした時に呼び出されるコールバック関数を指定出来るようになりました。</li>
+          <li>オプションにpickMoveStart、pickMove、pickMoveEndが追加され、摘み（ポインタ）のドラッグ開始、ドラッグ中、ドラッグ終了時に呼び出されるコールバック関数を指定出来るようになりました。
+          </li>
+          <li>オプションにbarMoveStart、barMove、barMoveEndが追加され、時間軸バーのドラッグ開始、ドラッグ中、ドラッグ終了時に呼び出されるコールバック関数を指定出来るようになりました。</li>
+          <li>コンストラクタおよびcreateメソッドの引数にコールバック関数が追加され、時間軸バーの初期生成後や再描画後に行いたい処理を指定出来るようになりました。</li>
+          <li>getTimeFromOffsetメソッドが追加され、オフセット座標から時間軸バー上の日時が取得出来るようになりました。</li>
+          <li>getOffsetFromTimeメソッドが追加され、日時から時間軸バー上のオフセット座標が取得出来るようになりました。</li>
+        </ul>
+      </li>
+      <li>2019年08月30日 バージョン1.0.0（初版）リリース</li>
+    </ul>
+  </div>
+
+  <div class="cols">
+    <h2>主な機能</h2>
+    <ul>
+      <li>左端の日時、右端の日時、摘み（ポインタ）の日時を任意に指定して時間軸バーを描画出来ます。</li>
+      <li>時間軸バーや摘み（ポインタ）は左右にドラッグ出来ます。</li>
+      <li>マウスの左ダブルクリックでズームイン、右クリックでズームアウト出来ます。</li>
+      <li>マウスホイールでズームイン・アウト出来ます。</li>
+      <li>タッチデバイスではピンチ操作でズームイン・アウト出来ます。</li>
+      <li>再生機能で自動スクロールが出来ます。</li>
+    </ul>
+  </div>
+
+  <div class="cols">
+    <h2>導入方法</h2>
+    <p><span class="num">1.</span>下記ライブラリをダウンロードする。</p>
+    <p style="font-size:14px">jquery-k2go-timeline.cssとjquery-k2go-timeline-pick.pngは同じディレクトリに配置して下さい</p>
+
+    <ul>
+      <li>jquery-k2go-timeline.js</li>
+      <li>jquery-k2go-timeline.css</li>
+      <li>jquery-k2go-timeline-pick.png</li>
+      <li>License.txt</li>
+    </ul>
+
+    <p><span class="num">2.</span>jquery（Ver3.4.1以上）とダウンロードしたライブラリをHTMLファイルへ組み込む。</p>
+    <span class="ex">例</span>
+    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;script type="text/javascript" src="jquery-3.4.1.min.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript" src="jquery-k2go-timeline.js"&gt;&lt;/script&gt;
+  &lt;link type="text/css" href="jquery-k2go-timeline.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  ・・・
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+    <p><span class="num">3.</span>windowオブジェクトのload完了後、時間軸バーを組み込みたい要素へ実装する。</p>
+    <span class="ex">例</span>
+    <pre>
+$(window).on("load", function()
+{
+  $(セレクタ).k2goTimeline(オプション, function(pTimeInfo)
+  {
+    // 時間軸バー生成後に読みだされるコールバック関数です。指定は任意です。
+    // pTimeInfo.  startTimeから左端の日時を取得
+    // pTimeInfo.    endTimeから右端の日時を取得
+    // pTimeInfo.currentTimeから摘み（ポインタ）の日時を取得
+  });
+});</pre>
+  </div>
+
+  <div class="cols">
+    <h2>オプション</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>名前</th>
+          <th>型</th>
+          <th>初期値</th>
+          <th>説明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>startTime </td>
+          <td>Date </td>
+          <td>今日の0時0分0秒 </td>
+          <td>時間軸バーの左端の日時。</td>
+        </tr>
+        <tr>
+          <td>endTime </td>
+          <td>Date </td>
+          <td>今日の23時59分59秒 </td>
+          <td>時間軸バーの右端の日時。</td>
+        </tr>
+        <tr>
+          <td>currentTime </td>
+          <td>Date </td>
+          <td>現在日時 </td>
+          <td>時間軸バーの摘み（ポインタ）の日時。</td>
+        </tr>
+        <tr>
+          <td>minTime </td>
+          <td>Date </td>
+          <td>現在より100年前の日時 </td>
+          <td>時間軸バーの過去方向への表示可能範囲。</td>
+        </tr>
+        <tr>
+          <td>maxTime </td>
+          <td>Date </td>
+          <td>現在より100年後の日時 </td>
+          <td>時間軸バーの未来方向への表示可能範囲。</td>
+        </tr>
+        <tr>
+          <td>rangeStartTime </td>
+          <td>Date </td>
+          <td>undefined </td>
+          <td>レンジバーの左端の日時。</td>
+        </tr>
+        <tr>
+          <td>rangeEndTime </td>
+          <td>Date </td>
+          <td>undefined </td>
+          <td>レンジバーの右端の日時。</td>
+        </tr>
+        <tr>
+          <td>timezoneOffset </td>
+          <td>Number </td>
+          <td>OSのロケール値（JSTなら540） </td>
+          <td>協定世界時 (UTC) までのタイムゾーンの差。単位は分。この値に基づき日時を表記します。</td>
+        </tr>
+        <tr>
+          <td>jpCalendar </td>
+          <td>Boolean </td>
+          <td>false </td>
+          <td>trueに設定すると日時が和暦表示になります（通常は西暦表示）。</td>
+        </tr>
+        <tr>
+          <td>minScale </td>
+          <td>Number </td>
+          <td>1 </td>
+          <td>1ピクセル辺りの最小時間幅。単位はミリ秒。1ピクセル辺りの時間幅が、この値以下にはズームインしません。</td>
+        </tr>
+        <tr>
+          <td>maxScale </td>
+          <td>Number </td>
+          <td>5184000000（60日） </td>
+          <td>1ピクセル辺りの最大時間幅。単位はミリ秒。1ピクセル辺りの時間幅が、この値以上にはズームアウトしません。</td>
+        </tr>
+        <tr>
+          <td>disableMoveBar </td>
+          <td>Boolean </td>
+          <td>false </td>
+          <td>trueに設定すると時間軸バーの左右へのドラッグ機能が無効になります。</td>
+        </tr>
+        <tr>
+          <td>disableZoom </td>
+          <td>Boolean </td>
+          <td>false </td>
+          <td>trueに設定すると時間軸バーのズーム機能が無効になります。</td>
+        </tr>
+        <tr>
+          <td>syncPickAndBar </td>
+          <td>Boolean </td>
+          <td>false </td>
+          <td>trueに設定すると時間軸バーと摘み（ポインタ）が同期して左右にドラッグするようになります。</td>
+        </tr>
+        <tr>
+          <td>clickBarToMovePick </td>
+          <td>Boolean </td>
+          <td>false </td>
+          <td>trueに設定すると時間軸バーをクリックした時に摘み（ポインタ）がクリックした位置に移動するようになります。</td>
+        </tr>
+        <tr>
+          <td>labelPosition </td>
+          <td>String </td>
+          <td>"point" </td>
+          <td>
+            "point"に設定すると時間軸バー上のラベルは各日時の真下に表示されます。"range"に設定すると時間軸バー上のラベルは各日時間隔の中央に表示されます。<br />
+            【例】年単位にラベルが表示される場合、"point"に設定すると「2020」は2020年1月1日の真下、「2021」は2021年1月1日の真下に表示されます。"range"に設定すると「2020」は2020年1月1日～2020年12月31日の中央、「2021」は2021年1月1日～2021年12月31日の中央に表示されます。
+          </td>
+        </tr>
+        <tr>
+          <td>pickLineDistance</td>
+          <td>Object </td>
+          <td>{element:$("body"),position:"top"}</td>
+          <td>
+            摘み（ポインタ）から表示される垂直線の到達点を設定します。elementには対象要素のjqueryオブジェクトを指定します。positionには"top"または"bottom"を指定します。摘み（ポインタ）から表示される垂直線はelementで指定された要素の上端（"top"）または下端（"bottom"）まで表示されます。
+          </td>
+        </tr>
+        <tr>
+          <td>timeChange </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>日時が変更される度に呼び出されるコールバック関数です。引数のオブジェクトよりstartTime、endTime、currentTimeが取得出来ます。</td>
+        </tr>
+        <tr>
+          <td>railClick </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>摘み（ポインタ）が左右に動くレール上をクリックした際に呼び出されるコールバック関数です。引数のオブジェクトよりstartTime、endTime、currentTimeが取得出来ます。</td>
+        </tr>
+        <tr>
+          <td>pickMoveStart </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>摘み（ポインタ）のドラッグが開始された際に呼び出されるコールバック関数です。引数のオブジェクトよりstartTime、endTime、currentTimeが取得出来ます。</td>
+        </tr>
+        <tr>
+          <td>pickMove </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>摘み（ポインタ）がドラッグされる度に呼び出されるコールバック関数です。引数のオブジェクトよりstartTime、endTime、currentTimeが取得出来ます。</td>
+        </tr>
+        <tr>
+          <td>pickMoveEnd </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>摘み（ポインタ）のドラッグが終了した際に呼び出されるコールバック関数です。引数のオブジェクトよりstartTime、endTime、currentTimeが取得出来ます。</td>
+        </tr>
+        <tr>
+          <td>pickTapHold </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>摘み（ポインタ）を長押しした際に呼び出されるコールバック関数です。引数のオブジェクトよりstartTime、endTime、currentTimeが取得出来ます。</td>
+        </tr>
+        <tr>
+          <td>pickDoubleTap </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>
+            摘み（ポインタ）をダブルクリック（ダブルタップ）した際に呼び出されるコールバック関数です。引数のオブジェクトよりstartTime、endTime、currentTimeが取得出来ます。<br />
+            また、ダブルクリックの場合は引数のオブジェクトよりマウスボタン情報が取得出来ます。値は左ボタンの場合が1、右ボタンの場合が-1となります（ダブルタップの場合は常に1）。<br />
+            <div style="font-weight:bold">
+              ※注意※<br />摘み（ポインタ）をダブルクリック（ダブルタップ）した際のデフォルト動作はズームですが、このpickDoubleTapオプションを指定すると摘み（ポインタ）をダブルクリック（ダブルタップ）した際はズームされなくなります。
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>barMoveStart </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>時間軸バーのドラッグが開始された際に呼び出されるコールバック関数です。引数のオブジェクトよりstartTime、endTime、currentTimeが取得出来ます。</td>
+        </tr>
+        <tr>
+          <td>barMove </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>時間軸バーがドラッグされる度に呼び出されるコールバック関数です。引数のオブジェクトよりstartTime、endTime、currentTimeが取得出来ます。</td>
+        </tr>
+        <tr>
+          <td>barMoveEnd </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>時間軸バーのドラッグが終了した際に呼び出されるコールバック関数です。引数のオブジェクトよりstartTime、endTime、currentTimeが取得出来ます。</td>
+        </tr>
+        <tr>
+          <td>zoomStart </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>ズームが開始された際に呼び出されるコールバック関数です。引数のオブジェクトよりstartTime、endTime、currentTimeが取得出来ます。ズームは</td>
+        </tr>
+        <tr>
+          <td>zoom </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>ズーム中に呼び出されるコールバック関数です。引数のオブジェクトよりstartTime、endTime、currentTimeが取得出来ます。</td>
+        </tr>
+        <tr>
+          <td>zoomEnd </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>ズームが終了した際に呼び出されるコールバック関数です。引数のオブジェクトよりstartTime、endTime、currentTimeが取得出来ます。</td>
+        </tr>
+        <tr>
+          <td>rangeMoveStart </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>レンジバーのドラッグが開始された際に呼び出されるコールバック関数です。引数のオブジェクトよりrangeStartTime、rangeEndTimeが取得出来ます。</td>
+        </tr>
+        <tr>
+          <td>rangeMove </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>レンジバーがドラッグされる度に呼び出されるコールバック関数です。引数のオブジェクトよりrangeStartTime、rangeEndTimeが取得出来ます。</td>
+        </tr>
+        <tr>
+          <td>rangeMoveEnd </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>レンジバーのドラッグが終了した際に呼び出されるコールバック関数です。引数のオブジェクトよりrangeStartTime、rangeEndTimeが取得出来ます。</td>
+        </tr>
+        <tr>
+          <td>rangeChange </td>
+          <td>Function</td>
+          <td>undefined </td>
+          <td>レンジバーの日時が変更される度に呼び出されるコールバック関数です。引数のオブジェクトよりrangeStartTime、rangeEndTimeが取得出来ます。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <span class="ex">コンストラクタの例</span>
+    <pre>
+var date = new Date();
+
+$(セレクタ).k2goTimeline(
+{
+  startTime   : new Date(date.getFullYear()    , date.getMonth()    ,  1), // 左端の日時を今月の01日に設定
+  endTime     : new Date(date.getFullYear()    , date.getMonth() + 1,  1), // 右端の日時を翌月の01日に設定
+  currentTime : new Date(date.getFullYear()    , date.getMonth()    , 16), // 摘み（ポインタ）の日時を今月の16日に設定
+  minTime     : new Date(date.getFullYear()    ,                   0,  1), // 過去方向への表示可能範囲を今年の1月1日に設定
+  maxTime     : new Date(date.getFullYear() + 1,                   0,  1), // 未来方向への表示可能範囲を翌年の1月1日に設定
+  timeChange  : function(pTimeInfo)
+  {
+    // pTimeInfo.  startTimeから左端の日時を取得
+    // pTimeInfo.    endTimeから右端の日時を取得
+    // pTimeInfo.currentTimeから摘み（ポインタ）の日時を取得
+  },
+  pickDoubleTap : function(pTimeInfo, pWhich)
+  {
+    // pTimeInfo.  startTimeから左端の日時を取得
+    // pTimeInfo.    endTimeから右端の日時を取得
+    // pTimeInfo.currentTimeから摘み（ポインタ）の日時を取得
+    // pWhichの値は、1が左ボタン、-1が右ボタンをクリック
+  },
+  rangeChange : function(pTimeInfo)
+  {
+    // pTimeInfo.rangeStartTimeからレンジバーの左端の日時を取得
+    // pTimeInfo.  rangeEndTimeからレンジバーの右端の日時を取得
+  }
+});</pre>
+
+  </div>
+
+
+  <div class="cols">
+    <h2>メソッド</h2>
+    <h3>create</h3>
+    <table class="method">
+      <tbody>
+        <tr>
+          <td>説明</td>
+          <td>指定した日時情報で時間軸バーを再描画します。</td>
+        </tr>
+        <tr>
+          <td>構文</td>
+          <td>$(セレクタ).k2goTimeline("create"[, 引数]);</td>
+        </tr>
+        <tr>
+          <td>引数</td>
+          <td>
+            <table class="method" style="margin: 0;width:100%">
+              <tbody>
+                <tr>
+                  <td style="background: #eee">名前</td>
+                  <td style="background: #eee">型</td>
+                  <td style="background: #eee">初期値</td>
+                  <td style="background: #eee">説明</td>
+                </tr>
+                <tr>
+                  <td>timeInfo </td>
+                  <td>Object </td>
+                  <td>undefined </td>
+                  <td>minTime、maxTime、startTime、endTime、currentTimeの日時情報を含むObject。日時を変更せず再描画したい場合は指定不要。</td>
+                </tr>
+                <tr>
+                  <td>duration </td>
+                  <td>Number </td>
+                  <td>1 </td>
+                  <td>時間軸バーを再描画する際のアニメーション時間。単位はミリ秒。アニメーションせず再描画したい場合は指定不要。</td>
+                </tr>
+                <tr>
+                  <td>callback </td>
+                  <td>Function </td>
+                  <td>undefined </td>
+                  <td>時間軸バーの再描画後に呼び出されるコールバック関数。引数のオブジェクトよりstartTime、endTime、currentTimeが取得出来ます。</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>戻り値</td>
+          <td>jqueryオブジェクト</td>
+        </tr>
+        <tr>
+          <td>実装例</td>
+          <td class="code">
+            <pre>
+$(セレクタ).k2goTimeline("create",
+{
+  timeInfo :
+  {
+    minTime     : 最小日時,
+    maxTime     : 最大日時,
+    startTime   : 左端日時,
+    endTime     : 右端日時,
+    currentTime : 摘み（ポインタ）日時
+  },
+  duration : 500,
+  callback : function(pTimeInfo)
+  {
+    // pTimeInfo.  startTimeから左端の日時を取得
+    // pTimeInfo.    endTimeから右端の日時を取得
+    // pTimeInfo.currentTimeから摘み（ポインタ）の日時を取得
+  }
+});</pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>zoomIn</h3>
+    <table class="method">
+      <tbody>
+        <tr>
+          <td>説明</td>
+          <td>摘み（ポインタ）の位置を基点に時間軸バーをズームインします。</td>
+        </tr>
+        <tr>
+          <td>構文</td>
+          <td>$(セレクタ).k2goTimeline("zoomIn");</td>
+        </tr>
+        <tr>
+          <td>引数</td>
+          <td>無し</td>
+        </tr>
+        <tr>
+          <td>戻り値</td>
+          <td>jqueryオブジェクト</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>zoomOut</h3>
+    <table class="method">
+      <tbody>
+        <tr>
+          <td>説明</td>
+          <td>摘み（ポインタ）の位置を基点に時間軸バーをズームアウトします。</td>
+        </tr>
+        <tr>
+          <td>構文</td>
+          <td>$(セレクタ).k2goTimeline("zoomOut");</td>
+        </tr>
+        <tr>
+          <td>引数</td>
+          <td>無し</td>
+        </tr>
+        <tr>
+          <td>戻り値</td>
+          <td>jqueryオブジェクト</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>showRangeBar</h3>
+    <table class="method">
+      <tbody>
+        <tr>
+          <td>説明</td>
+          <td>指定した日時情報でレンジバーを描画します。</td>
+        </tr>
+        <tr>
+          <td>構文</td>
+          <td>$(セレクタ).k2goTimeline("showRangeBar"[, 引数]);</td>
+        </tr>
+        <tr>
+          <td>引数</td>
+          <td>
+            <table class="method" style="margin: 0;width:100%">
+              <tbody>
+                <tr>
+                  <td style="background: #eee">名前</td>
+                  <td style="background: #eee">型</td>
+                  <td style="background: #eee">初期値</td>
+                  <td style="background: #eee">説明</td>
+                </tr>
+                <tr>
+                  <td>rangeStartTime </td>
+                  <td>Date </td>
+                  <td>undefined </td>
+                  <td>レンジバーの左端の日時。日時を変更しない場合（オプションで指定済みの場合）は指定不要。</td>
+                </tr>
+                <tr>
+                  <td>rangeEndTime </td>
+                  <td>Date </td>
+                  <td>undefined </td>
+                  <td>レンジバーの右端の日時。日時を変更しない場合（オプションで指定済みの場合）は指定不要。</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>戻り値</td>
+          <td>jqueryオブジェクト</td>
+        </tr>
+        <tr>
+          <td>実装例</td>
+          <td class="code">
+            <pre>
+$(セレクタ).k2goTimeline("showRangeBar",
+{
+  rangeStartTime : レンジバー左端日時,
+  rangeEndTime   : レンジバー右端日時
+});</pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>hiddenRangeBar</h3>
+    <table class="method">
+      <tbody>
+        <tr>
+          <td>説明</td>
+          <td>レンジバーを非表示にします。</td>
+        </tr>
+        <tr>
+          <td>構文</td>
+          <td>$(セレクタ).k2goTimeline("hiddenRangeBar");</td>
+        </tr>
+        <tr>
+          <td>引数</td>
+          <td>無し</td>
+        </tr>
+        <tr>
+          <td>戻り値</td>
+          <td>jqueryオブジェクト</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>start</h3>
+    <table class="method">
+      <tbody>
+        <tr>
+          <td>説明 </td>
+          <td>時間軸バーの自動スクロールを開始します。</td>
+        </tr>
+        <tr>
+          <td>構文 </td>
+          <td>$(セレクタ).k2goTimeline("start", 引数);</td>
+        </tr>
+        <tr>
+          <td>引数</td>
+          <td>
+            <table class="method" style="margin: 0;width:100%">
+              <tbody>
+                <tr>
+                  <td style="background: #eee">名前</td>
+                  <td style="background: #eee">型</td>
+                  <td style="background: #eee">初期値</td>
+                  <td style="background: #eee">説明</td>
+                </tr>
+                <tr>
+                  <td>realTime</td>
+                  <td>Boolean </td>
+                  <td>false </td>
+                  <td>
+                    trueの場合、リアルタイム再生になります（loopとspeedの値は無視されます）。<br />
+                    falseの場合、摘み（ポインタ）が指し示す時間軸バーの日時から自動スクロールが開始されます（レンジバーが表示中の時はレンジバーの期間内に摘み（ポインタ）が移動します）。
+                  </td>
+                </tr>
+                <tr>
+                  <td>loop </td>
+                  <td>Boolean </td>
+                  <td>false </td>
+                  <td>
+                    trueの場合、レンジバーが表示中の時はレンジバーの期間（rangeStartTimeからrangeEndTime）、レンジバーが非表示の時は表示可能範囲（minTimeからmaxTime）の間でループ再生になります。<br />
+                    falseの場合、レンジバーが表示中の時はレンジバーの期間（rangeStartTimeまたはrangeEndTime）、レンジバーが非表示の時は表示可能範囲（minTimeまたはmaxTime）に到達すると自動スクロールは停止します。
+                  </td>
+                </tr>
+                <tr>
+                  <td>fps </td>
+                  <td>Number </td>
+                  <td>10 </td>
+                  <td>1秒間の描画回数です。値が小さいとスクロールの動きが粗くなり、値が大きいとスクロールの動きが滑らかになります。</td>
+                </tr>
+                <tr>
+                  <td>speed </td>
+                  <td>Number </td>
+                  <td>10 </td>
+                  <td>1秒間に移動するピクセル数です。値が小さいとスクロールが遅く、値が大きいとスクロールが速くなります。負の値を指定すると過去方向（左から右）へスクロールします。</td>
+                </tr>
+                <tr>
+                  <td>stop </td>
+                  <td>Function</td>
+                  <td>undefined</td>
+                  <td>自動スクロールが停止した時に呼び出されるコールバック関数です。</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>戻り値</td>
+          <td>jqueryオブジェクト</td>
+        </tr>
+        <tr>
+          <td>実装例</td>
+          <td class="code">
+            <pre>
+$(セレクタ).k2goTimeline("start",
+{
+  fps   :   5,       // 1秒間に5回描画
+  speed : 100,       // 1秒間に100ピクセル移動
+  stop  : function()
+  {
+    // 自動スクロール停止時の処理
+  }
+});</pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>stop</h3>
+    <table class="method">
+      <tbody>
+        <tr>
+          <td>説明 </td>
+          <td>時間軸バーの自動スクロールを停止します。</td>
+        </tr>
+        <tr>
+          <td>構文 </td>
+          <td>$(セレクタ).k2goTimeline("stop");</td>
+        </tr>
+        <tr>
+          <td>引数 </td>
+          <td>無し</td>
+        </tr>
+        <tr>
+          <td>戻り値</td>
+          <td>jqueryオブジェクト</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>getTimeFromOffset</h3>
+    <table class="method">
+      <tbody>
+        <tr>
+          <td>説明 </td>
+          <td>オフセット座標から時間軸バー上の日時を取得します。</td>
+        </tr>
+        <tr>
+          <td>構文 </td>
+          <td>$(セレクタ).k2goTimeline("getTimeFromOffset", 引数);</td>
+        </tr>
+        <tr>
+          <td>引数 </td>
+          <td>日時を取得したい位置のオフセット座標（X座標）</td>
+        </tr>
+        <tr>
+          <td>戻り値</td>
+          <td>指定したオフセット座標（X座標）の日時（Dateオブジェクト）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>getOffsetFromTime</h3>
+    <table class="method">
+      <tbody>
+        <tr>
+          <td>説明 </td>
+          <td>日時から時間軸バー上のオフセット座標を取得します。</td>
+        </tr>
+        <tr>
+          <td>構文 </td>
+          <td>$(セレクタ).k2goTimeline("getOffsetFromTime", 引数);</td>
+        </tr>
+        <tr>
+          <td>引数 </td>
+          <td>オフセット座標（X座標）を取得したい日時（Dateオブジェクト）</td>
+        </tr>
+        <tr>
+          <td>戻り値</td>
+          <td>指定した日時のオフセット座標（X座標）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>setOptions</h3>
+    <table class="method">
+      <tbody>
+        <tr>
+          <td>説明 </td>
+          <td>オプションの設定変更を行います。</td>
+        </tr>
+        <tr>
+          <td>構文 </td>
+          <td>$(セレクタ).k2goTimeline("setOptions", 引数);</td>
+        </tr>
+        <tr>
+          <td>引数 </td>
+          <td>変更したいオプション値を含むObject</td>
+        </tr>
+        <tr>
+          <td>戻り値</td>
+          <td>jqueryオブジェクト</td>
+        </tr>
+        <tr>
+          <td>実装例</td>
+          <td class="code">
+            <pre>
+$(セレクタ).k2goTimeline("setOptions",
+{
+  timezoneOffset : 0,    // タイムゾーンをUTCに設定
+  disableMoveBar : true, // 時間軸バーのドラッグ機能を無効に設定
+  disableZoom    : true  // 時間軸バーのズーム機能を無効に設定
+});</pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>getOptions</h3>
+    <table class="method">
+      <tbody>
+        <tr>
+          <td>説明 </td>
+          <td>オプション値を取得します。</td>
+        </tr>
+        <tr>
+          <td>構文 </td>
+          <td>$(セレクタ).k2goTimeline("getOptions");</td>
+        </tr>
+        <tr>
+          <td>引数 </td>
+          <td>無し</td>
+        </tr>
+        <tr>
+          <td>戻り値</td>
+          <td>現在のオプション値を含むObject</td>
+        </tr>
+        <tr>
+          <td>実装例</td>
+          <td class="code">
+            <pre>
+var options = $(セレクタ).k2goTimeline("getOptions");
+
+// options.  startTimeから左端の日時を取得
+// options.    endTimeから右端の日時を取得
+// options.currentTimeから摘み（ポインタ）の日時を取得</pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>formatDate</h3>
+    <table class="method">
+      <tbody>
+        <tr>
+          <td>説明</td>
+          <td>日時を指定した書式で文字列変換します。</td>
+        </tr>
+        <tr>
+          <td>構文</td>
+          <td>$(セレクタ).k2goTimeline("formatDate", 日時, 書式[, オフセット]);</td>
+        </tr>
+        <tr>
+          <td>引数</td>
+          <td>
+            <table>
+              <tbody>
+                <tr>
+                  <td>名前</td>
+                  <td>型</td>
+                  <td>初期値</td>
+                  <td>説明</td>
+                </tr>
+                <tr>
+                  <td>日時</td>
+                  <td>Date</td>
+                  <td>必須</td>
+                  <td>文字列変換したいDateオブジェクト。</td>
+                </tr>
+                <tr>
+                  <td>書式</td>
+                  <td>String</td>
+                  <td>必須</td>
+                  <td>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>%jp</td>
+                          <td>年（和暦）</td>
+                        </tr>
+                        <tr>
+                          <td>%y</td>
+                          <td>年（西暦4桁）</td>
+                        </tr>
+                        <tr>
+                          <td>%m</td>
+                          <td>月（ 1～12）</td>
+                        </tr>
+                        <tr>
+                          <td>%mm</td>
+                          <td>月（01～12）</td>
+                        </tr>
+                        <tr>
+                          <td>%d</td>
+                          <td>日（ 1～31）</td>
+                        </tr>
+                        <tr>
+                          <td>%dd</td>
+                          <td>日（01～31）</td>
+                        </tr>
+                        <tr>
+                          <td>%H</td>
+                          <td>時（00～24）</td>
+                        </tr>
+                        <tr>
+                          <td>%M</td>
+                          <td>分（00～59）</td>
+                        </tr>
+                        <tr>
+                          <td>%S</td>
+                          <td>秒（00～59）</td>
+                        </tr>
+                        <tr>
+                          <td>%N</td>
+                          <td>ミリ秒（000～999）</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>オフセット</td>
+                  <td>Number</td>
+                  <td>OSのロケール値（JSTなら540）</td>
+                  <td>協定世界時 (UTC) までのタイムゾーンの差。単位は分。この値に基づき日時を表記します。</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>戻り値</td>
+          <td>日時文字列</td>
+        </tr>
+        <tr>
+          <td>実装例</td>
+          <td class="code">
+            <pre>
+var date   = new Date(2019, 0, 1, 2, 3, 4);
+var string = $(セレクタ).k2goTimeline("formatDate", date, "%y年%mm月%dd日 %H時%M分%S秒");
+
+console.log(string); // -> 2019年01月01日 02時03分04秒
+</pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
