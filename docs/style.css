@@ -1,3 +1,98 @@
+@charset "utf-8";
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-style:normal;
+	font-weight: normal;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+html{
+    overflow-y: scroll;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+input, textarea,{
+	margin: 0;
+	padding: 0;
+}
+
+ol, ul{
+    list-style:none;
+}
+
+table{
+    border-collapse: collapse; 
+    border-spacing:0;
+}
+
+caption, th{
+    text-align: left;
+}
+
+a:focus {
+	outline:none;
+}
+
+.clearfix:after {
+	content: "."; 
+	display: block;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+}
+
+.clearfix {
+	min-height: 1px;
+}
+
+* html .clearfix {
+	height: 1px;
+	/*¥*//*/
+	height: auto;
+	overflow: hidden;
+	/**/
+}
+
+.both{
+	clear:both;
+}
+
+.inline_block {  
+	display: inline-block;  
+	*display: inline;  
+	*zoom: 1;  
+}
+
 @import url('https://fonts.googleapis.com/css?family=Muli:700|Roboto+Mono:400,700&display=swap');
 
 
@@ -35,39 +130,27 @@ h1 {
   line-height: 1em;
 }
 
-#main-img-wrap {
-  width: 100%;
-  margin: 56px auto 0px;
-  padding: 0;
-  height: 150px;
-  background: #22b8d0;
-  box-sizing: border-box;
-}
-
 #main-img {
   width: 100%;
-  margin: 56px auto 0px;
+  margin: 0px auto 0px;
   padding: 0;
-  height: 150px;
-  background: url(img/bg.png) no-repeat left top #22b8d0;
-  max-width: 1280px;
+  height: 100px;
+  background: #22b8d0;
+  box-sizing: border-box;
+  display: grid;
+  align-items: center;
 }
 
 #main-img h1 {
-  width: 300px;
   font-family: 'Muli', sans-serif;
   text-align: left;
-  margin: 0;
-  font-size: 60px;
+  margin: 0 0 0 30px;
+  font-size: 30px;
   font-weight: bold;
   color: #fff;
   line-height: 1em;
   text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  position: relative;
-  top: 30px;
-  left: 130px;
-  /* border: solid 1px red */
 }
 
 span {
