@@ -4,8 +4,8 @@ Webページに時間軸バーを簡単に組み込む事が出来るjqueryプ�
 
 ------------
 
-### Webサイト
-https://www.k2go.jp/public/Timeline/
+### ドキュメント
+https://nict-stars.github.io/Timeline/
 
 ------------
 
