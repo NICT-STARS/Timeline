@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+*    { -moz-user-select:none; -khtml-user-select:none; -webkit-user-select:none; user-select:none; }
+body { position:fixed; top:0px; left:0px; width:100%; height:100%; margin:0; padding:0; border:0; overflow:hidden; vertical-align:baseline; background:#000; font-style:normal; font-weight:normal; font-size:100%; font-family:"Lucida Grande","Helvetica Neue","Hiragino Kaku Gothic ProN","ヒラギノ角ゴ Pro W3",メイリオ,Meiryo,"ＭＳ Ｐゴシック",Geneva,Arial,Verdana,sans-serif; }
+
+#date                                { position:absolute; top:50px; left:0px; right:0px; margin:0 auto; width:240px; height:50px; line-height:50px; border:none; border-radius:5px; outline:none; font-size:18px; letter-spacing:0.1em; text-align:center; cursor:pointer; background:rgba(100,100,100,0.5); color:#fff; }
+.picker .picker__select--year        { width:auto; height:auto; font-size:1em; }
+.picker button.picker__button--clear { visibility:hidden; }
+
+body         #help                                          { margin:120px 50px 0 50px; color:#fff; }
+body         #help > ul                                     { max-height:50vh; overflow-y:auto; }
+body         #help > ul                    > li:last-child  { display:none; }
+body.autorun #help > ul                    > li:first-child { display:none; }
+body.autorun #help > ul                    > li:last-child  { display:block; }
+body         #help img                                      { width:1em; height:1em; }
+body         #help .autorun_range                           { display:inline-block; width:100px; height:1.1em; background:#039be5; }
+body         #help .autorun_repeat                          { display:inline-block; width: 80px; height:1.8em; line-height:1.8em; font-size:12px; text-align:center; color:#fff; background:#039be5; border:1px solid #fff; box-sizing:border-box; }
+body         #help .autorun_speed                           { display:inline-block; width: 80px; height:1.8em; line-height:1.8em; font-size:12px; text-align:center; color:#fff; background:#039be5; border:1px solid #fff; box-sizing:border-box; }
+body         #help .autorun_repeat:before                   { content:"Repeat"; }
+body         #help .autorun_speed:before                    { content:"Speed"; }
+body         #help .autorun_backward                        { display:inline-block; width:1.1em; height:1.1em; border-radius:1.1em; background:#fff url(img/autorun_backward.svg) 45% 50% no-repeat; background-size:0.5em 0.5em; -webkit-background-size:0.5em 0.5em; }
+body         #help .autorun_foward                          { display:inline-block; width:1.1em; height:1.1em; border-radius:1.1em; background:#fff url(img/autorun_foward.svg  ) 55% 50% no-repeat; background-size:0.5em 0.5em; -webkit-background-size:0.5em 0.5em; }
+body         #help .autorun_running                         { display:inline-block; width:100px; height:1.8em; line-height:1.8em; font-size:12px; text-align:center; color:#fff; background:#fc3; }
+body         #help .autorun_running:before                  { content:"Speed n fps"; }
+
+#time_controller                                                   { position:fixed; bottom:10px; left:0px; display:flex; width:100%; height:60px; z-index:1; }
+#time_controller > *                                               { flex:0 0 50px; cursor:pointer; }
+#time_controller > .date_prev                                      { background:url(img/time_controller_date_prev.svg) 50% 50% no-repeat; background-size:38px 38px; -webkit-background-size:38px 38px; }
+#time_controller > .time_prev                                      { background:url(img/time_controller_time_prev.svg) 50% 50% no-repeat; background-size:38px 38px; -webkit-background-size:38px 38px; }
+#time_controller > .time_next                                      { background:url(img/time_controller_time_next.svg) 50% 50% no-repeat; background-size:38px 38px; -webkit-background-size:38px 38px; }
+#time_controller > .date_next                                      { background:url(img/time_controller_date_next.svg) 50% 50% no-repeat; background-size:38px 38px; -webkit-background-size:38px 38px; }
+#time_controller > [class*="prev"]:active                          { background-color:rgba(3,155,229,0.5); }
+#time_controller > [class*="next"]:active                          { background-color:rgba(3,155,229,0.5); }
+#time_controller > .time_rail                                      { position:relative; flex:auto; font-size:12px; color:#fff; }
+#time_controller > .time_rail             .time_range              { position:absolute; left:0px; top:29px; width:100%; height:3px; background:#fff; }
+#time_controller > .time_rail             .time_label              { position:fixed; bottom:62px; width:80px; margin-left:-40px; font-size:12px; text-align:center; white-space:nowrap; color:#fff; pointer-events:none; }
+#time_controller > .time_rail             .k2go-timeline-main      { left:25px; right:25px; width:auto; }
+#time_controller > .time_rail             .k2go-timeline-bar       { opacity:0; }
+#time_controller > .time_rail             .k2go-timeline-rail      { top:45px; height:45px; background:none; box-shadow:none; border-radius:unset; }
+#time_controller > .time_rail             .k2go-timeline-pick      { bottom:6px; width:50px; height:50px; }
+#time_controller > .time_rail             .k2go-timeline-pick-knob { width:50px; height:50px; background:url(img/time_controller_knob.png) no-repeat; background-size:50px 50px; -webkit-background-size:50px 50px; }
+
+body                         #autorun_panel                                                                                                         { display:none; }
+body.autorun                 #autorun_panel                                                                                                         { display:block; position:fixed; left:0px; top:0px; z-index:1; }
+body.autorun                 #autorun_panel                 > #autorun_backward                                                                     { position:fixed; bottom:15px; left :45px; width:50px; height:50px; background:url(img/autorun_backward.svg) 45% 50% no-repeat; background-size:20px 20px; -webkit-background-size:20px 20px; background-color:#fff; border-radius:50px; cursor:pointer; }
+body.autorun                 #autorun_panel                 > #autorun_foward                                                                       { position:fixed; bottom:15px; right:45px; width:50px; height:50px; background:url(img/autorun_foward.svg  ) 55% 50% no-repeat; background-size:20px 20px; -webkit-background-size:20px 20px; background-color:#fff; border-radius:50px; cursor:pointer; }
+body.autorun                 #autorun_panel                 > #autorun_backward.active                                                              { background-image:url(img/autorun_backward_on.svg); }
+body.autorun                 #autorun_panel                 > #autorun_foward.active                                                                { background-image:url(img/autorun_foward_on.svg  ); }
+body.autorun                 #autorun_panel                 > #autorun_backward            > *                                                      { position:absolute; top:47px; width:50px; font-size:12px; text-align:center; color:#fc3; }
+body.autorun                 #autorun_panel                 > #autorun_foward              > *                                                      { position:absolute; top:47px; width:50px; font-size:12px; text-align:center; color:#fc3; }
+body.autorun                 #autorun_panel[step_level="1"] > #autorun_backward            > *:before                                               { content:"10min"; }
+body.autorun                 #autorun_panel[step_level="2"] > #autorun_backward            > *:before                                               { content:"30min"; }
+body.autorun                 #autorun_panel[step_level="3"] > #autorun_backward            > *:before                                               { content:"1hour"; }
+body.autorun                 #autorun_panel[step_level="4"] > #autorun_backward            > *:before                                               { content:"3hour"; }
+body.autorun                 #autorun_panel[step_level="5"] > #autorun_backward            > *:before                                               { content:"24hour"; }
+body.autorun                 #autorun_panel[step_level="1"] > #autorun_foward              > *:before                                               { content:"10min"; }
+body.autorun                 #autorun_panel[step_level="2"] > #autorun_foward              > *:before                                               { content:"30min"; }
+body.autorun                 #autorun_panel[step_level="3"] > #autorun_foward              > *:before                                               { content:"1hour"; }
+body.autorun                 #autorun_panel[step_level="4"] > #autorun_foward              > *:before                                               { content:"3hour"; }
+body.autorun                 #autorun_panel[step_level="5"] > #autorun_foward              > *:before                                               { content:"24hour"; }
+body.autorun                 #autorun_panel                 > #autorun_prev                                                                         { position:fixed; bottom:15px; left : 0px; width:45px; height:50px; background:url(img/time_controller_date_prev.svg) 80% 50% no-repeat; background-size:38px 38px; -webkit-background-size:38px 38px; cursor:pointer; }
+body.autorun                 #autorun_panel                 > #autorun_next                                                                         { position:fixed; bottom:15px; right: 0px; width:45px; height:50px; background:url(img/time_controller_date_next.svg) 20% 50% no-repeat; background-size:38px 38px; -webkit-background-size:38px 38px; cursor:pointer; }
+body.autorun                 #autorun_panel                 > #autorun_backward:active                                                              { background-color:rgba(3,155,229,0.5); }
+body.autorun                 #autorun_panel                 > #autorun_foward:active                                                                { background-color:rgba(3,155,229,0.5); }
+body.autorun                 #autorun_panel                 > #autorun_prev:active                                                                  { background-color:rgba(3,155,229,0.5); }
+body.autorun                 #autorun_panel                 > #autorun_next:active                                                                  { background-color:rgba(3,155,229,0.5); }
+body.autorun                 #autorun_panel                 > #autorun_range                                                                        { position:fixed; bottom:170px; display:flex; height:25px; font-size:12px; text-align:center; background:#039be5; color:#fff; }
+body.autorun                 #autorun_panel                 > #autorun_range               > #autorun_range_left                                    { flex:0 0 10px; cursor:w-resize; position:relative; }
+body.autorun                 #autorun_panel                 > #autorun_range               > #autorun_range_center                                  { flex:auto;     cursor:move;     }
+body.autorun                 #autorun_panel                 > #autorun_range               > #autorun_range_right                                   { flex:0 0 10px; cursor:e-resize; position:relative; }
+body.autorun                 #autorun_panel                 > #autorun_range               > #autorun_range_left           > *                      { position:absolute; bottom:25px; left:-40px; width:80px; cursor:pointer; }
+body.autorun                 #autorun_panel                 > #autorun_range               > #autorun_range_right          > *                      { position:absolute; bottom:25px; left:-30px; width:80px; cursor:pointer; }
+body.autorun                 #autorun_panel                 > #autorun_cover               > #autorun_frame                                         { position:fixed; bottom:105px; left:0px; right:0px; margin:0 auto; display:flex; flex-flow:row wrap; width:200px; height:60px; font-size:12px; text-align:center; background:#039be5; color:#fff; }
+body.autorun                 #autorun_panel                 > #autorun_cover               > #autorun_frame                > *                      { flex:0 0 100px; cursor:pointer; }
+body.autorun                 #autorun_panel                 > #autorun_cover               > #autorun_frame                > *:active               { color:#ccc; }
+body.autorun                 #autorun_panel                 > #autorun_cover               > #autorun_frame                > #autorun_repeat:before { content:"Repeat "; display:block; width:90.5px; height:25px; line-height:25px; margin:5px 5px 5px 2.5px; border:1px solid #fff; }
+body.autorun                 #autorun_panel                 > #autorun_cover               > #autorun_frame                > #autorun_speed:before  { content:"Speed ";  display:block; width:90.5px; height:25px; line-height:25px; margin:5px 2.5px 5px 5px; border:1px solid #fff; }
+body.autorun                 #autorun_panel                 > #autorun_cover               > #autorun_frame                > #autorun_speed:after   { content:" fps"; }
+body.autorun.running         #autorun_panel                 > #autorun_prev                                                                         { opacity:0.4; pointer-events:none; }
+body.autorun.running         #autorun_panel                 > #autorun_next                                                                         { opacity:0.4; pointer-events:none; }
+body.autorun.running         #autorun_panel                 > #autorun_range                                                                        { bottom:155px; background:#fc3; transition:0.3s; }
+body.autorun.running         #autorun_panel                 > #autorun_cover                                                                        { display:block; position:fixed; top:0px; left:0px; height:100%; width:100%; }
+body.autorun.running         #autorun_panel                 > #autorun_cover               > #autorun_frame                                         { width:100px; height:50px; background:none; transition:0.3s; }
+body.autorun.running         #autorun_panel                 > #autorun_cover               > #autorun_frame                > #autorun_repeat        { color:#fc3; pointer-events:none; }
+body.autorun.running         #autorun_panel                 > #autorun_cover               > #autorun_frame                > #autorun_repeat:before { display:inline; margin:0px; border:none; }
+body.autorun.running         #autorun_panel                 > #autorun_cover               > #autorun_frame                > #autorun_speed         { background:#fc3; }
+body.autorun.running         #autorun_panel                 > #autorun_cover               > #autorun_frame                > #autorun_speed:before  { display:inline; margin:0px; border:none; }
+body.autorun                 #time_controller               > .date_prev                                                                            { visibility:hidden; }
+body.autorun                 #time_controller               > .time_prev                                                                            { visibility:hidden; }
+body.autorun                 #time_controller               > .time_next                                                                            { visibility:hidden; }
+body.autorun                 #time_controller               > .date_next                                                                            { visibility:hidden; }
+body.autorun                 #time_controller               > .time_rail                   .k2go-timeline-pick-knob:before                          { content:">"; display:block; width:50px; height:50px; line-height:50px; font-size:20px; text-align:center; color:#000; }
+body.autorun.reverse         #time_controller               > .time_rail                   .k2go-timeline-pick-knob:before                          { content:"<"; display:block; width:50px; height:50px; line-height:50px; font-size:20px; text-align:center; color:#000; }

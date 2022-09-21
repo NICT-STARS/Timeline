@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Timeline</title>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="../timeline/1.8.0/jquery-k2go-timeline.js"></script>
+  <link   type="text/css"       href="../timeline/1.8.0/jquery-k2go-timeline.css" rel="stylesheet">
+  <script type="text/javascript" src="js/env.js"></script>
+  <script type="text/javascript" src="js/fnc.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <link   type="text/css"       href="css/index.css" rel="stylesheet">
+</head>
+<body>
+  <table>
+    <tbody>
+      <tr>
+        <td id="min_time">min time<br/><input type="date" readonly/><input type="time" step="1" readonly/></td>
+        <td></td>
+        <td id="max_time">max time<br/><input type="date" readonly/><input type="time" step="1" readonly/></td>
+      </tr>
+      <tr>
+        <td id="start_time"  >start   time<br/><input type="date" readonly/><input type="time" step="1" readonly/></td>
+        <td id="current_time">current time<br/><input type="date" readonly/><input type="time" step="1" readonly/></td>
+        <td id="end_time"    >end     time<br/><input type="date" readonly/><input type="time" step="1" readonly/></td>
+      </tr>
+      <tr>
+        <td id="range_start_time">range start time<br/><input type="date" readonly/><input type="time" step="1" readonly/></td>
+        <td>
+          range bar<br/>
+          <input id="range_bar_show"   type="button" value="show"/>
+          <input id="range_bar_hidden" type="button" value="hidden" />
+        </td>
+        <td id="range_end_time"  >range end   time<br/><input type="date" readonly/><input type="time" step="1" readonly/></td>
+      </tr>
+      <tr>
+        <td>
+          time zone<br/>
+          <select id="time_zone">
+            <option value="540">JST</option>
+            <option value="0"  >UTC</option>
+          </select>
+        </td>
+        <td>
+          format<br/>
+          <select id="jp_calendar">
+            <option value="0">西暦</option>
+            <option value="1">和暦</option>
+          </select>
+        </td>
+        <td>
+          label position<br/>
+          <select id="label_position">
+            <option value="point">point</option>
+            <option value="range">range</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+          zoom<br/>
+          <input id="zoom_in"      type="button" value="zoom in" />
+          <input id="zoom_out"     type="button" value="zoom out"/><br/>
+          <input id="zoom_disable" type="checkbox"/> <label for="zoom_disable">disable</label>
+        </td>
+        <td>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          play<br/>
+          <input id="realtime" type="checkbox"/> <label for="realtime">realtime</label>
+          <input id="loop"     type="checkbox"/> <label for="loop"    >loop    </label><br/>
+          <span class="fps">framerate <input id="fps" type="number" min="1" value="1" /></span>
+          <span class="pps">speed     <input id="pps" type="number"         value="10"/></span><br/>
+          <input id="start" type="button" value="start"/>
+          <input id="stop"  type="button" value="stop" />
+        </td>
+        <td>
+          get time from offset<br/>
+          <span  id="get_time">offset <input type="number"/></span><br/>
+          <input id="get_time_button" type="button" value="get"/><br/>
+          <span  id="get_time_result"></span>
+        </td>
+        <td>
+          get offset from time<br/>
+          <span  id="get_offset">time <input type="date"/><input type="time" step="1"/></span><br/>
+          <input id="get_offset_button" type="button" value="get"/><br/>
+          <span  id="get_offset_result"></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          scroll time bar<br/>
+          <input id="move_bar_disable" type="checkbox"/> <label for="move_bar_disable">disable</label>
+        </td>
+        <td>
+          sync pick and time bar<br/>
+          <input id="sync_pick_and_bar" type="checkbox"/> <label for="sync_pick_and_bar">synchronize</label>
+        </td>
+        <td>
+          click bar to move pick<br/>
+          <input id="click_bar_to_move_pick" type="checkbox"/> <label for="click_bar_to_move_pick">move pick</label>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          event info<br/>
+          <div id="event_info"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="timeline"></div>
+</body>
+</html>
