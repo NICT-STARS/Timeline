@@ -546,8 +546,8 @@ $("#button_back").on("click", function(pEvent, pExtra)
     objTimeInfo.endTime     = new Date(objOptions.endTime    .getTime() - $Env.frameInterval);
     objTimeInfo.currentTime = new Date(objOptions.currentTime.getTime() - $Env.frameInterval);
 
-    var intDiff1 = objTimeInfo.startTime.getTime() - objTimeInfo.    endTime.getTime();
-    var intDiff2 = objTimeInfo.startTime.getTime() - objTimeInfo.currentTime.getTime();
+    var intDiff1 = objTimeInfo.endTime.    getTime() - objTimeInfo.startTime.getTime();
+    var intDiff2 = objTimeInfo.currentTime.getTime() - objTimeInfo.startTime.getTime()
 
     if (objOptions.minTime.getTime() > objTimeInfo.startTime.getTime())
     {
