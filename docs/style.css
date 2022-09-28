@@ -153,20 +153,6 @@ h1 {
   box-sizing: border-box;
 }
 
-
-
-
-.pankuzu {
-  margin: 0 auto 0;
-  padding: 0;
-  width: 100%;
-  max-width: 1280px;
-  display: flex;
-  align-items: center;
-  height: 50px;
-  border-bottom: solid 1px #ddd
-}
-
 .cols {
   width: 100%;
   max-width: 1280px;
@@ -176,6 +162,10 @@ h1 {
   box-sizing: border-box;
   border-bottom: solid 1px #ddd;
   /* box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); */
+}
+
+span {
+  font-size: 14px
 }
 
 dl {
