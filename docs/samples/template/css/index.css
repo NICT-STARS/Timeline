@@ -1,22 +1,23 @@
-table           { width:100%; border-spacing:0; border-left:1px solid #000; border-top:1px solid #000; }
-td              { text-align:center; border-right:1px solid #000; border-bottom:1px solid #000; padding:5px 0 10px 0; font-size:11px; }
+@import url("https://fonts.googleapis.com/css2?family=Monda:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+body            { display: block; margin: 0; padding: 0; background: #555; position: relative; font-size: 18px; font-weight: 400; font-family: "Monda", sans-serif; }
+:root           { --active-color: #fc4; }
+#main           { display: block; background: #ccc; width: 100%; height: 100%; margin: 0; padding: 0; }
+#content        { top: 132px; position: fixed; width: 100%; height: calc(100% - 222px); z-index: -2; background: #888;}
+table           { border: none;  width: 100%; border-spacing: 0; border-left: 1px solid #000; border-top: 1px solid #000;}
+.app_table      { width: 80%; border-spacing: 0; table-layout: fixed; position: absolute; top: calc(50% + 132px); left: 50%; transform: translate(-50%, calc(-50% - 110px)); border-radius: 10px; background: #292d3e; box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5); user-select: none; }
+td              { border: none; text-align: center; border-right: 1px solid rgba(0, 0, 0, 0.4); border-bottom: 1px solid rgba(0, 0, 0, 0.4); padding: 5px 10px 10px 10px; font-size: 18px; font-weight: 700; color: #7ea0c7;}
+td span         { display: block; font-size: 16px; font-weight: 700; color: #fff; }
 input[readonly] { pointer-events:none; }
-#timeline       { position:fixed; bottom:0px; left:10%; width:80%; }
+input[type="range"] { -webkit-appearance: none; appearance: none; cursor: pointer; outline: none; height: 2px; width: 100%; background: #85a1c8;border-radius: 2px; }
+#event_info { color: #fff; font-size: 16px; }
 
-.disable { pointer-events:none; opacity:0.5; }
-
-.scale       { white-space:nowrap; margin-right:1em; }
-.scale:after { content:"ms/px"; }
-.scale input { width:5em; text-align:right; }
-
-.fps       { white-space:nowrap; margin-right:1em; }
-.fps:after { content:"f/sec"; }
-.fps input { width:3em; text-align:right; }
-
-.pps       { white-space:nowrap; }
-.pps:after { content:"px/sec"; }
-.pps input { width:3em; text-align:right; }
-
-#get_time       { white-space:nowrap; }
-#get_time:after { content:"px"; }
-#get_time input { width:5em; text-align:right; }
+k2go-timeline   { position: fixed; bottom: 0px; height: 90px; width: 100%; background: linear-gradient(90deg, rgba(11, 14, 27, 1) 0%, rgba(27, 30, 43, 1) 5.9%, rgba(11, 14, 27, 1) 6%, rgba(11, 14, 27, 1) 94%, rgba(27, 30, 43, 1) 94.1%, rgba(11, 14, 27, 1) 100%); background: rgba(11, 14, 27, 1); box-shadow: 0 -1px 4px rgba(0,0,0,0.5); z-index: -1 }
+k2go-timeline::part(k2go-timeline-pick-knob) { background:#fff; }
+k2go-timeline::part(k2go-timeline-pick-line) { background:#7da2cc; }
+k2go-timeline::part(k2go-timeline-main) { position:absolute; left: 0px;  bottom: 0px; width: 100%; height: 90px; background-color:rgba(27, 30, 43, 1) } 
+k2go-timelineheader { position: absolute; width: 100%; }
+k2go-timelineheader::part(k2go-head-left) { background: url(../img/k2go-logo.png) no-repeat center 5px; background-size: 80px; padding: 0; height: 50px; display: block; }
+k2go-timelineheader::part(k2go-timeline-logo) { display: inline-block; width: 100%; text-align: center; margin: 30px auto 0; font-size: 15px; color: #aaa; font-family: Monda, sans-serif; }
+k2go-functionbar { position: fixed; top: 76px; width: 100%; height: 60px; background: #292d3e; display: grid; grid-template-columns: 240px 1fr 240px; justify-content: space-around; align-items: center; font-family: Monda, sans-serif; color: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+k2go-timelineheader div.picker { font-size: 16px; text-align: left; line-height: 1.2; color: #000; position: absolute; z-index: 10000; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; outline: none; }
