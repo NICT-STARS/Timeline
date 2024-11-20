@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+#current_time                 { position:fixed; top:100px; left:0px; right:0px; margin:auto; width:24em; padding:1em 0; white-space:nowrap; text-align:center; }
+#current_time > *:first-child { font-size:2em; }
+
+#zoom_button                  { position:fixed; top:100px; right:10px; display:flex; flex-direction:column; }
+#zoom_button > .in            { margin:0 0 5px 0; flex-basis:50px; width:50px; font-size:1.5em; cursor:pointer; }
+#zoom_button > .out           { margin:5px 0 0 0; flex-basis:50px; width:50px; font-size:1.5em; cursor:pointer; }
+#zoom_button > .in:before     { content:"+"; }
+#zoom_button > .out:before    { content:"-"; }
+#zoom_button > .in[disabled]  { cursor:auto; opacity:0.5; }
+#zoom_button > .out[disabled] { cursor:auto; opacity:0.5; }
+
+#legend                    { position:fixed; left:20px; top:30px; list-style:none; margin:0; padding:0; height:72vh; max-height:535px; overflow-y:auto; }
+#legend > *                { display:flex; margin:0 0 2px 0; font-size:11px; }
+#legend > * > *            { margin-right:5px; }
+#legend > * > *:last-child { width:50px; }
+
+#jp_calendar           { position:fixed; right:80px; bottom:160px; }
+#jp_calendar:before    { content:"和暦表示"; }
+#jp_calendar.jp:before { content:"西暦表示"; }
+
+#data_bar > *          { position:fixed; bottom:120px; height:30px; cursor:pointer; }
+#data_bar > *.selected { box-sizing:border-box; border:2px solid #000; }
+
+#time_controller                   { position:fixed; bottom:10px; left:0px; display:flex; width:100%; height:90px; }
+#time_controller > #timeline       { position:relative; flex-grow:1; }
+#time_controller > .prev           { margin:0 20px 0 10px; flex-basis:50px; cursor:pointer; }
+#time_controller > .next           { margin:0 10px 0 20px; flex-basis:50px; cursor:pointer; }
+#time_controller > .prev:before    { content:"prev"; }
+#time_controller > .next:before    { content:"next"; }
+#time_controller > .prev[disabled] { cursor:auto; opacity:0.5; }
+#time_controller > .next[disabled] { cursor:auto; opacity:0.5; }
